@@ -1,5 +1,6 @@
 require 'odk_aggregate/http/response_processors/form_response'
 require 'multi_xml'
+require 'ox'
 
 module OdkAggregate
   module Form

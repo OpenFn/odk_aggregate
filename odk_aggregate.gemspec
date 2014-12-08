@@ -27,4 +27,5 @@ Gem::Specification.new do |spec|
   #spec.add_runtime_dependency 'faraday-digestauth'
   spec.add_runtime_dependency 'rash',               '~> 0.4'
   spec.add_runtime_dependency 'multi_xml'
+  spec.add_runtime_dependency 'ox'
 end
