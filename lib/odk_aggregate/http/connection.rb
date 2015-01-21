@@ -1,6 +1,9 @@
 require 'base64'
-#require 'faraday'
-require 'odk_aggregate/http/digestauth'
+require 'faraday'
+require 'faraday/digestauth'
+# Use the Faraday adapter that comes with Typhoeus.
+require 'typhoeus/adapters/faraday' if defined? Typhoeus
+
 
 require 'odk_aggregate/resources/form'
 require 'odk_aggregate/resources/submission'
@@ -25,13 +28,13 @@ module OdkAggregate
       @password = password
 
       @connection ||= Faraday.new(url, connection_options) do |connection|
+        connection.request :digest, username, password if username && password
         #connection.response :xml,  :content_type => /\bxml$/, typecast_xml_value: false
         connection.use FaradayMiddleware::Rashify
         connection.response :logger
-        connection.adapter :net_http
+        connection.adapter Faraday.default_adapter
       end
 
-      @connection.digest_auth username, password if username && password
     end
 
 
