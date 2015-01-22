@@ -33,7 +33,7 @@ module OdkAggregate
       response = MultiXml.parse resp, typecast_xml_value: false      
       final_response = response["html"]["head"]["model"]["bind"]
 
-      response["h:html"]["h:body"].each_pair do |key, value| 
+      response["html"]["body"].each_pair do |key, value| 
         if value.is_a?(Array)      
           value.each do |v|
             set_field_response_group(final_response, key, v)
@@ -50,7 +50,7 @@ module OdkAggregate
     def get_top_element
       resp = @connection.send(:get, @download_url).body
       response = MultiXml.parse resp, typecast_xml_value: false
-      response["h:html"]["h:head"]["model"]["bind"].first["nodeset"].split("/")[1]
+      response["html"]["head"]["model"]["bind"].first["nodeset"].split("/")[1]
     end
 
     protected
