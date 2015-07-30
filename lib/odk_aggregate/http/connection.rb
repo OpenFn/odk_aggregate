@@ -17,7 +17,7 @@ module OdkAggregate
     include OdkAggregate::Submission
 
     def initialize(url = nil, username = nil, password = nil)
-      url = base_url if url.blank?
+      url = base_url if url.empty?
       connect(url, username, password)
     end
 
